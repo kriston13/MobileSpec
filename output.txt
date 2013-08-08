@@ -1,0 +1,53 @@
+/webapp/wcs/stores/servlet/m20StoreView?catalogId=10501&langId=-1&storeId=10501
+F*****F***
+
+Pending:
+  The catalog has a product list you arrive at from the subcategory menu
+    # steps needs to be filled out
+    # ./spec/features/catalog_spec.rb:76
+  The catalog has a product list that can be faceted
+    # steps needs to be filled out
+    # ./spec/features/catalog_spec.rb:80
+  The catalog can be searched
+    # steps needs to be filled out
+    # ./spec/features/catalog_spec.rb:84
+  The catalog can be searched, sorted and faceted
+    # steps needs to be filled out
+    # ./spec/features/catalog_spec.rb:88
+  The catalog has a floating footer while browsing the menu, product list, and searching
+    # steps needs to be filled out
+    # ./spec/features/catalog_spec.rb:93
+  The catalog requires a member to have a date of birth to view a tobacco flagged product list
+    # steps need to be filled out
+    # ./spec/features/catalog_spec.rb:120
+  The catalog prevents a member who is too young from viewing tobacco flagged product list
+    # steps need to be filled out
+    # ./spec/features/catalog_spec.rb:124
+  The catalog allows an old enough member to view tobacco flagged product list
+    # steps need to be filled out
+    # ./spec/features/catalog_spec.rb:128
+
+Failures:
+
+  1) The catalog has a menu to browse aisles, categories, and subcategories
+     Screenshot: ./tmp/capybara/screenshot_2013-07-10-18-54-32.038.png
+     Failure/Error: page.should have_content(aisle_one)
+       expected to find text "Pantry" in "Coles Online Help Shop by category Log in Register Categories Generic Error Something has gone wrong and we are still trying to figure out what it was. Need Help? We're on hand to answer any questions: Contact Coles Home page"
+     # ./spec/features/catalog_spec.rb:48:in `block (2 levels) in <top (required)>'
+
+  2) The catalog requires a member to log in to view a tobacco flagged product list
+     Screenshot: ./tmp/capybara/screenshot_2013-07-10-18-54-37.717.png
+     Failure/Error: click_link 'Tobacco '
+     Capybara::ElementNotFound:
+       Unable to find link "Tobacco "
+     # ./spec/features/catalog_spec.rb:103:in `block (2 levels) in <top (required)>'
+
+Finished in 31.53 seconds
+10 examples, 2 failures, 8 pending
+
+Failed examples:
+
+rspec ./spec/features/catalog_spec.rb:38 # The catalog has a menu to browse aisles, categories, and subcategories
+     Screenshot: ./tmp/capybara/screenshot_2013-07-10-18-54-32.038.png
+rspec ./spec/features/catalog_spec.rb:97 # The catalog requires a member to log in to view a tobacco flagged product list
+     Screenshot: ./tmp/capybara/screenshot_2013-07-10-18-54-37.717.png
