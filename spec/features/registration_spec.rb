@@ -81,9 +81,9 @@ describe "The Registration process", :type => :feature, :js => true do
 	
 		visit(registerURL)
 		fill_in('Suburb or post code', :with => invalid_suburb)
-		#screenshot_and_open_image
+		
 		click_button('Continue')
-		#screenshot_and_open_image
+		
 		page.should have_content(/Sorry, we can.t find that location/)
 	
 	end
@@ -97,11 +97,11 @@ describe "The Registration process", :type => :feature, :js => true do
 
 		click_button('Continue')
 		
-		click_link(HD_suburb_full.upcase)
+		#click_link(HD_suburb_full.upcase)
 		
-		#find('a',:text=>HD_suburb_full.upcase).click #attempting to find a link and then click it
-		
-		#find_link(HD_suburb_full.upcase).click #attempting another way to find and click a link
+		Capybara.match = :prefer_exact
+		find('span.heading',:text=>HD_suburb_full.upcase).click #attempting to find a link and then click it
+		#Capybara.exact = false
 		
 		page.should have_content('Register')
 		page.should have_content('Personal details')
@@ -118,8 +118,10 @@ describe "The Registration process", :type => :feature, :js => true do
 		fill_in('Suburb or post code', :with => RD_suburb)
 		
 		click_button('Continue')
-		
-		click_link(RD_suburb_full.upcase)
+
+		Capybara.exact = true
+		find('span.heading',:text=>RD_suburb_full.upcase).click #attempting to find a link and then click it
+		Capybara.exact = false
 		
 		page.should have_content('Remote Delivery')
 		page.should have_content('Click & Collect')
@@ -139,7 +141,9 @@ describe "The Registration process", :type => :feature, :js => true do
 		
 		click_button('Continue')
 		
-		click_link(CC_suburb_full.upcase)
+		Capybara.exact = true
+		find('span.heading',:text=>CC_suburb_full.upcase).click #attempting to find a link and then click it
+		Capybara.exact = false
 		
 		page.should have_content('Click & Collect')
 		
@@ -187,7 +191,12 @@ describe "The Registration process", :type => :feature, :js => true do
 		
 		fill_in('Given name', :with => '123')
 		fill_in('Family name', :with => '456')
-		fill_in('Date of birth', :with => '2015-06-23')
+		
+		page.select '31', :from => 'birthDay'
+		page.select 'December', :from => 'birthMonth'
+		page.select '2013', :from => 'birthYear'
+		
+		
 		fill_in('Email address', :with => 'boom.com')
 		fill_in('Create password', :with => 'short')
 		fill_in('Confirm password', :with => 'not-the-same')
@@ -214,7 +223,12 @@ describe "The Registration process", :type => :feature, :js => true do
 		#puts email_address
 		fill_in('Given name', :with => 'Given')
 		fill_in('Family name', :with => 'Name')
-		fill_in('Date of birth', :with => '1989-01-01')
+		
+		page.select '11', :from => 'birthDay'
+		page.select 'January', :from => 'birthMonth'
+		page.select '1918', :from => 'birthYear'
+		
+		#fill_in('Date of birth', :with => '1989-01-01')
 		fill_in('Email address', :with => email_address)
 		fill_in('Create password', :with => 'passw0rd')
 		fill_in('Confirm password', :with => 'passw0rd')
@@ -261,8 +275,10 @@ describe "The Registration process", :type => :feature, :js => true do
 		fill_in('Suburb or post code', :with => CC_suburb)
 		
 		click_button('Continue')
-		
-		click_link(CC_suburb_full.upcase)
+
+		Capybara.exact = true
+		find('span.heading',:text=>CC_suburb_full.upcase).click #attempting to find a link and then click it
+		Capybara.exact = false
 		
 		page.should have_content('Click & Collect')
 		
@@ -303,8 +319,10 @@ describe "The Registration process", :type => :feature, :js => true do
 		fill_in('Suburb or post code', :with => RD_suburb)
 		
 		click_button('Continue')
-	
-		click_link(RD_suburb_full.upcase)
+
+		Capybara.match = :prefer_exact
+		find('span.heading',:text=>RD_suburb_full.upcase).click #attempting to find a link and then click it
+#		Capybara.exact = false
 			
 		page.should have_content('Remote Delivery')
 		page.should have_content('We can delivery to this locations') #known typos

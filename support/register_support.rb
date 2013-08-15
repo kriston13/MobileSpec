@@ -8,7 +8,9 @@ def go_to_registration_page_with_HD
 
 	click_button('Continue')
 	
-	click_link('3056 - Brunswick'.upcase)
+	Capybara.exact = true
+	find('span.heading',:text=>'3056 - Brunswick'.upcase).click #attempting to find a link and then click it
+	Capybara.exact = false
 
 	page.should have_content('Register')
 	
